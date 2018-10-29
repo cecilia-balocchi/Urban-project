@@ -1,0 +1,24 @@
+Instruction on how to collect covariates data:
+
+Poverty for the American Community Survey:
+On https://factfinder.census.gov select 'Advanced Search' and under Geographies select 
+Geographic type: 'Block Group (or part) - 150'
+State: 'Pennsylvania'
+County: 'Philadelphia'
+and 'All Block Groups within Philadelphia County, Pennsylvania'
+and add that to your selection.
+Under Topics select 'People' > 'Poverty' > 'Poverty'.
+Under year 2013 select and download the dataset 'RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS', with ID C17002.
+
+About income measures: https://www.investopedia.com/terms/h/household_income.asp
+Thus we want to use Median Household income 
+On https://factfinder.census.gov select 'Advanced Search' and under Geographies select 
+Geographic type: 'Block Group (or part) - 150'
+State: 'Pennsylvania'
+County: 'Philadelphia'
+and 'All Block Groups within Philadelphia County, Pennsylvania'
+and add that to your selection.
+Under Topics select 'People' > 'Income & Earnings (Households)' > 'Income/Earnings (Households)'.
+Under year 2013 select and download the dataset 'MEDIAN HOUSEHOLD INCOME IN THE PAST 12 MONTHS (IN 2013 INFLATION-ADJUSTED DOLLARS)', with ID B19013.
+
+Check Colman's https://github.com/ColmanHumphrey/urbananalytics/blob/master/code/get_clean_data/setup_main.R for other covariates.
