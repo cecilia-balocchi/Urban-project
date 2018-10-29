@@ -64,6 +64,7 @@ clean_crime.from_csv <- function(file_path.name, data_path = "../data/"){
   # there could be mistakes
   # SOLVED BY: saving also the block/blockgroup/tract identifier!
   
+  ## This is where we check in which region the point falls!
   # over returns a list: each element of the list corresponds to a region
   # and contains a vector with the indices of the crimes happened in that region
   # so the length of that vector is the number of crimes in that region
