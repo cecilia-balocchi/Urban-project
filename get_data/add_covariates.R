@@ -5,6 +5,7 @@
 # Update 9/22: now that poverty and income are correct, the correct transformations are
 # income) and sqrt(poverty) - I saved the correct data_new
 # Update 9/24: we can create data_new using either crime_agr2018 or data_agr (doing the first here)
+# Update 12/3: I am setting the population of blockgroup 1336 to NA, since it's a prison.
 library(ape)
 library(ggplot2)
 library(ggmap)
@@ -20,6 +21,7 @@ load("data/crime/crime_agr2018.rdata")
 
 # using the data Colman gave me in phillyblockgroup
 tmp <- phillyblockgroup@data[,c("income13", "poverty13", "vacantprop", "comresprop", "total", "segregationmetric", "GEOID10")]
+tmp$total[1336] <- NA
 tmp2 <- crime_agr2018[,c("X", "GEOID10", "year", "year19", "tr.violent")]
 
 tmp.rep <- tmp[match(tmp2$GEOID10, tmp$GEOID10),]
@@ -30,11 +32,12 @@ data_new <- tmp2 %>% mutate(log.income13 = log(tmp.rep$income13), sqrt.poverty13
 
 save(data_new, file = "data/data_new.rdata")
 # setwd("~/Dropbox (Penn)/Urban Project/parametric/")
+# setwd("~/Dropbox (Penn)/HPCC/parametric/")
 # save(data_new, file = "data/data_new.rdata")
 
 
 
-## The reason for this transformation can be found here:
+## The reason for thes transformations can be found here:
 test <- tmp2 %>% mutate(income13 = tmp.rep$income13, poverty13 = tmp.rep$poverty13, vacantprop = tmp.rep$vacantprop, 
                         comresprop = tmp.rep$comresprop, pop_total = tmp.rep$total, segregation = tmp.rep$segregationmetric)
 
