@@ -10,8 +10,8 @@ Some of this code was created with the help of Colman. For other useful function
 
 ## Adding covariate and transformations for the linear model
 
-Check 'add_covariates.R'.
 In 'get order in poverty and income13.R' I reconstruct the poverty and income metrics and convert them to the right order relative to our dataset.
+In 'add_covariates.R' I use some transformations to create the dataset that we will use for the data analysis.
 
 ## GEOID in Shapefiles
 
