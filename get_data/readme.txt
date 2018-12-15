@@ -15,7 +15,7 @@ In 'import_shapefiles.R' we use `readOGR` (from the package 'rgdal') to read and
 ## Adding covariate and transformations for the linear model
 
 In 'get order in poverty and income13.R' I reconstruct the poverty and income metrics and convert them to the right order relative to our dataset.
-In 'add_covariates.R' I use some transformations to create the dataset that we will use for the data analysis.
+In 'add_covariates.R' I use some transformations to our covariates and combine them with the crime data that I got from 'crime_setup' ('crime_agr2018.Rdata') to create the dataset that we will use for the data analysis.
 
 ## GEOID in Shapefiles
 

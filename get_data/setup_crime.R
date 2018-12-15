@@ -6,6 +6,7 @@ require(scales)
 require(rgeos)
 library(spdep)
 # setwd("~/Dropbox (Penn)/STAT/STAT research/Urban/")
+
 # Assuming the working directory is set to the main project folder, say 'Urban', not to this 'get_data' subfolder or 'code'
 # and assuming this folder contains 'code' and 'data'.
 # 'data' contains 'csv' where I keep the raw file downloaded from the Philadelphia Police Department ('incidents_part1_part2.csv')

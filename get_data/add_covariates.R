@@ -21,7 +21,7 @@ load("data/crime/crime_agr2018.rdata")
 
 # using the data Colman gave me in phillyblockgroup
 tmp <- phillyblockgroup@data[,c("income13", "poverty13", "vacantprop", "comresprop", "total", "segregationmetric", "GEOID10")]
-tmp$total[1336] <- NA
+tmp$total[1336] <- NA # we exclude this blockgroup because it's a prison
 tmp2 <- crime_agr2018[,c("X", "GEOID10", "year", "year19", "tr.violent")]
 
 tmp.rep <- tmp[match(tmp2$GEOID10, tmp$GEOID10),]
