@@ -4,9 +4,13 @@ In 'setup_crime.R', I create the aggregated datasets from the csv crime file, bo
 I consider the new transformation Inverse Hyperbolic Sine transformation. 
 I include years from 2006 to 2017. 
 The functions to make those modifications are contained in 'clean_crime.R'.
+This code requires that you have downloaded shapefiles of the regions you want to aggregate over and save them as R objects as done in 'import_shapefiles.R'. 
 
-Some of this code was created with the help of Colman. For other useful functions check 
-'setupcrime_colman.R'.
+Some of this code was created with the help of Colman. For other useful functions you can check 'setupcrime_colman.R'.
+
+## Get shapefiles and import them in R
+
+In 'import_shapefiles.R' we use `readOGR` (from the package 'rgdal') to read and import a shapefile into R. Remember that the folder containing your '.shp' file should also contain a bunch of other files with the same name but different extension (.shx, .prj, .dbf, .cpg).
 
 ## Adding covariate and transformations for the linear model
 
@@ -19,6 +23,4 @@ GEOID10 is an important identifier for blocks/block groups/census tracts shapefi
 In the shapefile Colman gave me originally this variable was missing, I just add it with 'get_GEOID.R'.
 
 ### Some notes
-- Use `readOGR` (instead of 'readShapePoly') to read and import a shapefile into R. Set the working directory where all the files are (not only .shp but also .shx, .prj, .dbf, .cpg). Use: 'readOGR("path/to/file.shp")'.
-- I usually import my shapefiles and save them as R objects in 'data/shapefiles'.
 - In `create data for sameer.R' I created a dataset with the number of crimes divided by type.
