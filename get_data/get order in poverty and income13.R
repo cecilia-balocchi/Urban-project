@@ -4,7 +4,8 @@ load("data/shapefile/phillyblockgroup")
 library(dplyr)
 
 #### poverty 13
-poverty_13 <- read.csv("data/poverty2013ratioincome/ACS_13_5YR_C17002_with_ann.csv", header = T, skip = 1, colClasses = c("character","factor","character",rep("integer",16)))
+# since I downloaded this file "with annotations"
+poverty_13 <- read.csv("data/ACS_13_5YR_C17002/ACS_13_5YR_C17002_with_ann.csv", header = T, skip = 1, colClasses = c("character","factor","character",rep("integer",16)))
 # View(poverty_13)
 
 # we are interested only in the estimates and the total (we exclude the sd)
@@ -31,19 +32,9 @@ head(poverty_13cols)
 order <- match(phillyblockgroup@data$GEOID10, poverty_13cols$GEOID10)
 phillyblockgroup@data$poverty13 <- poverty_13cols[order,10]
 
-# old non-efficient way of doing the same thing
-# re_order <- rep(NA, 1336)
-# for(i in 1:1336){
-#   str <- phillyblockgroup@data$GEOID10[i]
-#   tmp <- which(poverty_13cols$GEO.id2 == str)
-#   if(length(tmp)!=1) cat(i, " ")
-#   re_order[i] <- tmp
-# }
-# phillyblockgroup@data$poverty13 <- pov[re_order]
-
 #### income 13
-income_13 <- read.csv("data/income2013percapita/ACS_13_5YR_B19301.csv", header = T) #this is the one colman used!
-# income_13 <- read.csv("data/income2013medianhousehold/ACS_13_5YR_B19013.csv", header = T) # medianincome has much more NAs
+income_13 <- read.csv("data/ACS_13_5YR_B19301/ACS_13_5YR_B19301.csv", header = T) #this is the one colman used, income per capita!
+# income_13 <- read.csv("data/ACS_13_5YR_B19013/ACS_13_5YR_B19013.csv", header = T) # median income per household has much more NAs
 income_13 <- income_13[,c(2,4)]
 colnames(income_13) <- c("GEOID10", "income")
 
@@ -63,6 +54,40 @@ income_13[1334:1336,]
 # we need to get the right order to match the income here to the neighborhoods of the main dataframe
 order <- match(phillyblockgroup@data$GEOID10, income_13$GEOID10)
 phillyblockgroup@data$income13 <- income_13[order,2]
+
+#### population total and segregation
+race <- read.csv("data/DEC_10_SF1_P5/DEC_10_SF1_P5_with_ann.csv", header = T, skip = 1, colClasses = c("character","factor","character",rep("integer",17)))
+## total
+total <- race[,c(2,4)]
+colnames(total) <- c("GEOID10", "total")
+
+order <- match(phillyblockgroup@data$GEOID10, total$GEOID10)
+phillyblockgroup@data$total <- total[order,2]
+## segregation
+
+# white corresponds to "Not.Hispanic.or.Latino....White.alone" (column 6)
+# black corresponds to "Not.Hispanic.or.Latino....Black.or.African.American.alone" (column 7)
+# asian corresponds to "Not.Hispanic.or.Latino....Asian.alone" (column 9)
+# other corresponds to the sum of "Not.Hispanic.or.Latino....American.Indian.and.Alaska.Native.alone", 
+# "Not.Hispanic.or.Latino....Native.Hawaiian.and.Other.Pacific.Islander.alone", 
+# "Not.Hispanic.or.Latino....Some.Other.Race.alone", "Not.Hispanic.or.Latino....Two.or.More.Races"
+# (columns 8,10,11,12)
+# hispanic corresponds to "Hispanic.or.Latino." (column 13)
+
+race2 <- race[,c(2,4,6,7,9,13)]
+colnames(race2) <- c("GEOID10","total","white","black","asian","hispanic")
+race2$other <- rowSums(race[,c(8,10,11,12)])
+ratio <- race2[,3:7]/race2[,2]
+overall <- colSums(race2[,2:7], na.rm = T)
+overall <- overall[2:6]/overall[1]
+overall <- array(rep(overall, each = nrow(ratio)), dim = dim(ratio))
+race2$segregationmetric <- (rowSums(abs(ratio-overall))/2)
+
+phillyblockgroup@data$segregationmetric <- race2[order,"segregationmetric"]
+# optionally, add also the number of people per race:
+phillyblockgroup@data <- cbind(phillyblockgroup@data, race2[order,3:7])
+
+
 
 save(phillyblockgroup, file = "data/shapefile/phillyblockgroup")
 # setwd("/Users/cecib/Dropbox (Penn)/Urban Project/parametric/")
