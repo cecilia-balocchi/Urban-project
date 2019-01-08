@@ -25,4 +25,4 @@ In the shapefile Colman gave me originally this variable was missing, I just add
 In 'get_covariates_from_csv.R' I construct the covariates (poverty, income, population total and segregatio) from the CSV downloaded from the census, reorder them appropriately and merge them to our dataset.
 In 'add_covariates.R' I use some transformations to our covariates and combine them with the crime data that I got from 'crime_setup' ('crime_agr2018.Rdata') to create the dataset that we will use for the data analysis.
 
-For downloading the CSV files from the census, check covariates_readme.txt.
+For downloading the CSV files from the census, check data_collection.md.
