@@ -3,13 +3,13 @@
 In 'setup_crime.R', I create the aggregated datasets from the csv crime file, both aggregating over block groups and over tracts. The crime file was downloaded from https://www.opendataphilly.org/dataset/crime-incidents.
 I consider the transformation Inverse Hyperbolic Sine transformation. 
 I include years from 2006 to 2017. 
-The functions to make those modifications are contained in 'clean_crime.R'.
+The functions to make those modifications are contained in 'subsetup/clean_crime.R'.
 This code requires that you have downloaded shapefiles of the regions you want to aggregate over and save them as R objects as done in 'import_shapefiles.R'. 
 The shapefiles for Phiadelphia can be downloaded at
 https://www.opendataphilly.org/dataset/census-block-groups,
 https://www.opendataphilly.org/dataset/census-blocks and https://www.opendataphilly.org/dataset/census-tracts (I used the shapefiles from 2010).
 
-Some of this code was created with the help of Colman Humphrey (https://github.com/ColmanHumphrey/). For other useful functions you can check 'setupcrime_colman.R'.
+Some of this code was created with the help of [Colman Humphrey](https://github.com/ColmanHumphrey/). For other useful functions you can check 'subsetup/setupcrime_colman.R'.
 
 ## Get shapefiles and import them in R
 

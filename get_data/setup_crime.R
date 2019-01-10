@@ -12,7 +12,7 @@ library(spdep)
 # 'data' contains 'csv' where I keep the raw file downloaded from the Philadelphia Police Department ('incidents_part1_part2.csv')
 # 'data' contains 'shapefile', where I saved as R objects the shapefiles (read using 'readOGR')
 
-source("code/get_data/clean_crime.R")
+source("code/get_data/subsetup/clean_crime.R")
 # crimes.new is a dataset where each row represents a crime and we save time/location and crimetype info
 crimes.new <- clean_crime.from_csv("data/csv/incidents_part1_part2.csv", data_path = "data/")
 save(crimes.new, file = 'data/crime/crimes.new2018.rdata')
