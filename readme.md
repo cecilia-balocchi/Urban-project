@@ -15,4 +15,5 @@ We acquire and clean:
   - violent crimes
 
 These data are aggregated over block groups, and some things are specific to the city of Philadelphia.
+
 Check 'get_data/readme.md' and 'get_data/data_collection.md' for details on where to download data, and the specific purpose of each script. 
